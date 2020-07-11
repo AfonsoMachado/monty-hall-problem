@@ -1,16 +1,17 @@
 <template>
     <div id="app">
         <h1>Monty Hall Problem</h1>
-        <Gift />
+        <!-- Coloacando : no parametro, o valor é passado como boolean, mesmo entre chaves -->
+        <Door number="1" :hasGift="false" />
     </div>
 </template>
 
 <script>
-import Gift from './components/Gift'
+import Door from './components/Door'
 
 export default {
     name: 'App',
-    components: { Gift }
+    components: { Door }
 }
 </script>
 
