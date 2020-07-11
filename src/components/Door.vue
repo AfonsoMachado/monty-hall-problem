@@ -1,14 +1,16 @@
 <template>
     <!-- Inteface gráfica da porta -->
     <div class="door-area">
-        <div class="door-frame">
+        <!-- Se selected for verdadeiro e a porte estiver fechada, aplica a classe selected para o door frame -->
+        <div class="door-frame" :class="{ selected: selected && !open }">
             <!-- Presente só é renderizado se a porta estiver aberta e se o hasGift for verdadeiro -->
-            <Gift v-if="open && hasGift"/>
+            <Gift v-if="open && hasGift" />
         </div>
         <!-- Selecionando a porta no click -->
-        <div class="door" @click="selected = !selected">
-            <div class="number">{{ number }}</div>
-            <div class="knob"></div>
+        <div class="door" :class="{ open }" @click="selected = !selected">
+            <div class="number" :class="{ selected: selected }">{{ number }}</div>
+            <!-- Ao clicar na maçaneta, a porta é aberta -->
+            <div class="knob" @click.stop="open = true" :class="{ selected: selected }"></div>
         </div>
     </div>
 </template>
@@ -38,6 +40,7 @@ export default {
 /* Definindo variaveis */
 :root {
     --door-border: 5px solid brown;
+    --selected-border: 5px solid yellow;
 }
 
 .door-area {
@@ -87,5 +90,33 @@ export default {
     align-self: flex-start;
     margin-top: 60px;
 }
+
+.door-frame.selected {
+    border-left: var(--selected-border);
+    border-top: var(--selected-border);
+    border-right: var(--selected-border);
+}
+
+.door > .number.selected {
+    color: yellow;
+}
+
+.door > .knob.selected {
+    background-color: yellow;
+}
+
+.door.open {
+    background-color: #0007;
+}
+
+.door.open .knob {
+    display: none;
+}
+
+.door.open .number {
+    display: none;
+}
+
+
 
 </style>
