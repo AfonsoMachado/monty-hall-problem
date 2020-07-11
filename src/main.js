@@ -2,8 +2,10 @@ import Vue from 'vue'
 import App from './App'
 
 new Vue({
-    el: '#app',
-    render(createElement) {
-        return createElement(App)
-    }
-})
+    render: h => h(App)
+
+    // mesma coisa
+    // render(createElement) {
+    //     return createElement(App)
+    // }
+}).$mount("#app") //Renderizando a aplicação no arquivo index.html
